@@ -1,0 +1,35 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import 'variables.css';
+html, body { background: var(--bg); color: var(--text); font-family: var(--font-main); scroll-behavior: smooth; }
+a { color: var(--link); text-decoration: none; } a:hover { text-decoration: underline; }
+.section { padding: clamp(2rem, 4vw, 3.5rem); }
+.wrapper { max-width: 1320px; margin-inline: auto; }
+.card-soft { background: var(--card-bg); border-radius: var(--radius-xl); box-shadow: var(--shadow-soft); border: 1px solid var(--outline); }
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 999px;
+  padding: .75rem 1.25rem;
+  font-weight: 600;
+  line-height: 1.1;
+  gap: .35rem;
+}
+.badge-highlight { background: var(--primary-15); border-radius: 20px; padding: .35rem .6rem; color: #0b0b0c; font-weight: 700; display: inline-block; }
+.text-muted-custom { color: var(--muted); }
+hr.hr-soft { border-color: var(--outline); opacity: .2; }
+
+/* Corrige el contraste de .btn-outline-light en tema claro */
+[data-theme="light"] .btn-outline-light{
+  color: var(--text) !important;
+  border-color: var(--outline) !important;
+  background: transparent !important;
+}
+[data-theme="light"] .btn-outline-light:hover,
+[data-theme="light"] .btn-outline-light:focus{
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border-color: var(--outline) !important;
+  box-shadow: 0 0 0 .2rem color-mix(in oklab, var(--link) 25%, transparent);
+}

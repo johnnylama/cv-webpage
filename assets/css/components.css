@@ -1,0 +1,306 @@
+@import 'variables.css';
+
+/* ===========================
+   Sidebar
+   =========================== */
+:root{
+  --sidebar-width: 64px;
+  --sidebar-gap: 20px;
+}
+
+@media (min-width: 768px){
+  body{
+    padding-left: calc(var(--sidebar-width) + var(--sidebar-gap));
+  }
+}
+@media (max-width: 767.98px){
+  body{
+    padding-left: 0;
+  }
+}
+
+.sidebar{
+  position: fixed;
+  inset-block: 2rem;                 /* top/bottom = 2rem */
+  left: 1rem;
+  width: var(--sidebar-width);
+  background: var(--card-bg);
+  border: 1px solid var(--outline);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 0;
+  z-index: 1000;
+}
+.sidebar .icon-btn{
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  padding: 0;
+  color: var(--text);
+  cursor: pointer;
+  margin: .25rem 0;
+  transition: transform .15s ease, background .15s ease;
+}
+.sidebar .icon-btn:hover{ transform: translateY(-2px); }
+.sidebar .stack{ display: grid; gap: .5rem; align-content: start; }
+
+/* brillo sutil */
+.sidebar .icon-btn:hover{
+  box-shadow: 0 0 12px rgba(105,241,157,.35);
+  border-color: rgba(105,241,157,.6);
+}
+.sidebar .icon-btn:focus-visible{
+  outline: 2px solid color-mix(in oklab, var(--primary) 60%, transparent);
+  outline-offset: 2px;
+}
+
+/* Ocultar sidebar en móvil si no usas d-none d-md-flex en el HTML */
+@media (max-width: 767.98px){
+  .sidebar{ display: none !important; }
+}
+
+/* ===========================
+   Tarjetas / Hero
+   =========================== */
+.profile-card{ overflow: hidden; }
+.profile-card .avatar{
+  border-radius: 24px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.profile-card .role{
+  letter-spacing: .15em;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.socials a{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  margin-right: .5rem;
+}
+
+.cta-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .75rem;
+}
+.cta-row .btn-pill{
+  width: 100%;
+}
+
+.hero{
+  background: var(--card-bg);
+  border-radius: var(--radius-xl);
+  padding: clamp(2rem, 3vw, 3rem);
+  border: 1px solid var(--outline);
+}
+.hero h1{
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+.hero .kicker{ color: var(--muted); font-weight: 600; }
+.hero .underline-chip{
+  display: inline-block;
+  background: var(--primary);
+  color: #0a0a0a;
+  padding: .25rem .75rem;
+  border-radius: 999px;
+  transform: rotate(-2deg);
+}
+
+.stats{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+.stat .num{ font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; }
+.stat .label{ color: var(--muted); }
+
+/* ===========================
+   Secciones genéricas
+   =========================== */
+.section-card{
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  padding: 1.25rem;
+}
+.section-title{ font-weight: 800; margin-bottom: 1rem; }
+
+/* ===========================
+   Mobile bottom nav (opcional)
+   =========================== */
+.mobile-nav{
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: 999px;
+  padding: .25rem .35rem;
+  display: flex;
+  gap: .25rem;
+  z-index: 1000;
+  box-shadow: var(--shadow-soft);
+  padding-bottom: calc(.25rem + env(safe-area-inset-bottom));
+}
+.mobile-nav a{
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border-radius: 999px;
+  color: var(--text);
+}
+.mobile-nav a:hover{
+  background: var(--card-bg);
+  box-shadow: 0 0 10px rgba(var(--primary-rgb, 24,93,166), .25);
+  border: 1px solid var(--outline);
+}
+@media (min-width: 768px){
+  .mobile-nav{ display: none !important; }
+}
+
+/* ===================================================================
+   HOME a alto de pantalla + columnas igual altura (sin cortes)
+   =================================================================== */
+:root{ --home-py: 2rem; }                   /* padding vertical del #home */
+
+#home.wrapper.section{
+  padding-block: var(--home-py);
+}
+
+/* El grid del home ocupa toda la altura visible, pero puede crecer
+   si el contenido (H1, etc.) supera esa altura */
+#home .main-grid{
+  align-items: stretch;                     /* ambas columnas igual alto */
+  min-height: calc(100vh - (var(--home-py) * 2));
+}
+@supports (height: 100svh){
+  #home .main-grid{ min-height: calc(100svh - (var(--home-py) * 2)); }
+}
+@supports (height: 100dvh){
+  #home .main-grid{ min-height: calc(100dvh - (var(--home-py) * 2)); }
+}
+
+/* Las tarjetas forman columnas flex, SIN height fijo */
+.profile-card,
+.hero{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;                         /* como mínimo el alto del grid */
+}
+
+/* La foto mantiene su proporción – no se estira verticalmente.
+   (Los tamaños/ratio viven en animations.css) */
+.profile-frame{ flex: 0 0 auto; }
+
+/* En la tarjeta izquierda, empuja los CTA al fondo */
+.profile-card > :not(.profile-frame){
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+.profile-card .cta-row{ margin-top: auto; }
+
+/* En el hero, las métricas van al fondo (look del mockup) */
+.hero .stats{ margin-top: auto; padding-top: 1rem; }
+
+/* El H1 escala con el ancho del contenedor (.hero) */
+.hero{
+  container-type: inline-size; /* habilita cqw */
+}
+
+.hero h1{
+  /* Escala por contenedor: mínimo 28px, máximo 56px aprox. */
+  font-size: clamp(1.75rem, 6.5cqw, 3.5rem);
+  line-height: 1.08;
+  text-wrap: balance;              /* líneas más equilibradas */
+  margin-bottom: clamp(.5rem, 1cqw, 1rem);
+}
+
+/* El chip no debe crecer tanto respecto al H1 */
+.hero .underline-chip{
+  font-size: .95em;                /* un poco más pequeño que el h1 */
+  padding: .2em .7em;
+}
+
+/* ===========================
+   Chips de habilidades (base)
+   =========================== */
+:root{
+  /* color del brillo (puedes cambiarlo a #69f19d si quieres verde) */
+  --badge-glow: var(--primary);
+}
+
+.badge-highlight{
+  display:inline-flex;
+  align-items:center;
+  white-space:nowrap;
+  padding:.45rem .9rem;
+  border-radius:999px;
+  font-weight:700;
+  font-size:.95rem;
+  line-height:1;
+  border:1px solid var(--outline);
+  background: color-mix(in oklab, var(--surface) 92%, #fff 8%);
+  color: var(--text);
+  transition: transform .15s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+}
+
+/* ===========================
+   Modo dark: efecto neón
+   =========================== */
+[data-theme="dark"] .badge-highlight{
+  background: color-mix(in oklab, var(--badge-glow) 16%, #0b0b0c 84%);
+  border-color: color-mix(in oklab, var(--badge-glow) 55%, #1f1f1f 45%);
+  color:#eaf2ff;
+  /* glow sutil */
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--badge-glow) 42%, transparent) inset,
+    0 0 14px color-mix(in oklab, var(--badge-glow) 55%, transparent);
+  text-shadow:0 0 6px color-mix(in oklab, var(--badge-glow) 65%, transparent);
+}
+
+[data-theme="dark"] .badge-highlight:hover{
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--badge-glow) 65%, transparent) inset,
+    0 0 20px color-mix(in oklab, var(--badge-glow) 75%, transparent),
+    0 0 40px color-mix(in oklab, var(--badge-glow) 35%, transparent);
+}
+
+/* Pulso suave opcional (aplícalo a todos o a un contenedor específico) */
+@keyframes neonPulse{
+  0%,100%{
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--badge-glow) 42%, transparent) inset,
+      0 0 12px color-mix(in oklab, var(--badge-glow) 50%, transparent);
+  }
+  50%{
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--badge-glow) 62%, transparent) inset,
+      0 0 22px color-mix(in oklab, var(--badge-glow) 72%, transparent);
+  }
+}
+[data-theme="dark"] .badge-highlight.is-pulsing{ animation: neonPulse 3.2s ease-in-out infinite; }
+
+/* Respeta "reduce motion" */
+@media (prefers-reduced-motion: reduce){
+  .badge-highlight{ transition:none !important; }
+  .badge-highlight.is-pulsing{ animation:none !important; }
+}

@@ -1,0 +1,4 @@
+@import 'variables.css';
+.main-grid { display: grid; grid-template-columns: 360px 1fr; gap: clamp(1rem, 2.5vw, 2rem); }
+@media (max-width: 992px) { .sidebar { left: .5rem; width: 56px; } .main-grid { grid-template-columns: 1fr; } .cta-row { grid-template-columns: 1fr; } }
+@media (max-width: 576px) { .sidebar { display:none; } .stats { grid-template-columns: 1fr; } }

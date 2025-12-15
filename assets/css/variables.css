@@ -1,0 +1,28 @@
+:root {
+  --bg: #0f0f10;
+  --card-bg: #151517;
+  --surface: #1b1c1f;
+  --text: #e8e8ea;
+  --muted: #b2b3b7;
+  --primary: #185da6;
+  --primary-15: rgba(105, 241, 157, 0.15);
+  --primary-rgb: 24, 93, 166; 
+  --primary-soft: #5ea0df;
+  --outline: #2a2b30;
+  --link: #9ad6ff;
+  --font-main: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --radius-xl: 26px;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --shadow-soft: 0 6px 24px rgba(0, 0, 0, 0.25);
+  
+}
+[data-theme="light"] {
+  --bg: #f4f6f8;
+  --card-bg: #ffffff;
+  --surface: #ffffff;
+  --text: #121417;
+  --muted: #5a6475;
+  --outline: #e6e8ee;
+  --link: #1067ff;
+}
